@@ -8,31 +8,28 @@ Note that the target sum has to be obtained by summing two different integers in
 you can't add a single integer to itself in order to obtain the target sum.
 You can assume that there will be at most one pair of numbers summing up to the target sum.
 """
-# Redone Algorithms for understanding
-# Soultion 1 with HashTable
 
-def addTwoSum(array, targetSum):
+# Solution 1 - With Hash Tables
+def addTwoSum(arr, tSum):
     hashtable = {}
-    for num in array:
-        if targetSum - num in hashtable:
-            return [targetSum - num, num]
+    for num in arr:
+        if tSum - num in hashtable:
+            return [tSum - num, num]
         else:
-            hashtable[num] = True
+            hashtable[tSum - num] = True
     return []
 
-
-# Solution  2 with Left/Right Pointesr
+# Solution 2 - Left/Right Pointers
 def addTwoSum(array, targetSum):
     array.sort()
     left = 0
     right = len(array) - 1
-    while left != right:
+    while left < right:
         currentSum = array[left] + array[right]
         if currentSum == targetSum:
-            return[array[left], array[right]]
+            return [array[left], array[right]]
         elif currentSum < targetSum:
             left += 1
-        else:
+        elif currentSum > targetSum:
             right -= 1
     return []
-
